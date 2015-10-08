@@ -52,7 +52,7 @@ RUNNING=`screen -ls | grep minecraft`
 case "$1" in
 	start)
 		cd $LOCATION
-		if [ "$RUNNING" = "" ]
+		if [ "$RUNNING" == "" ]
 		then
 			screen -dmS minecraft $JAVA $JAVAOPTS $MINECRAFT nogui
 		fi
@@ -65,7 +65,7 @@ case "$1" in
 	restart)
 		screen -S minecraft -p 0 -X stuff `printf "stop\r"`
 		cd $LOCATION
-		until [ "$RUNNING" = "" ]
+		until [ "$RUNNING" == "" ]
 		do
 			RUNNING=`screen -ls | grep minecraft`
 		done
@@ -78,7 +78,7 @@ case "$1" in
 
 	sv)
 		cd $LOCATION
-		if [ "$RUNNING" = "" ]
+		if [ "$RUNNING" == "" ]
 		then
 			screen -dmS minecraft $JAVA $JAVAOPTS $MINECRAFT nogui
 		fi
