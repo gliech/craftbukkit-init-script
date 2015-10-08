@@ -67,6 +67,12 @@ then
 	exit 1
 fi
 
+# prepend sudo command if USER is given
+if [ "$USER" != "" ]
+then
+	USER="sudo -u $USER"
+fi
+
 #Determine whether or not Minecraft is already running
 RUNNING=`screen -ls | grep minecraft`
 
