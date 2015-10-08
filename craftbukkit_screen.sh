@@ -111,6 +111,10 @@ case "$1" in
 			$USER screen $SCREENOPTS $SCREENNAME $JAVA $JAVAOPTS -jar $MINECRAFT $MINECRAFTOPS
 		fi
 		;;
+		
+	reload|force-reload)
+		$USER screen -S $SCREENNAME -p 0 -X stuff `printf "reload\r"`
+		;;
 
 	view)
 		$USER screen -x $SCREENNAME
