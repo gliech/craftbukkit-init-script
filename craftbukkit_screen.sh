@@ -38,6 +38,12 @@ JAVAOPTS="-server -jar"
 
 ### END CONFIGURATION
 
+#check for GNU screen installation
+if !( hash screen 2>/dev/null )
+then
+	echo "It seems GNU screen is not installed on the maschine. Please install it, if you want to use this script."
+	exit 1
+fi
 
 #Determine whether or not Minecraft is already running
 RUNNING=`screen -ls | grep minecraft`
