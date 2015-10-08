@@ -116,6 +116,16 @@ case "$1" in
 		$USER screen -S $SCREENNAME -p 0 -X stuff `printf "reload\r"`
 		;;
 
+	status)
+		if [ "$RUNNING" == "" ]
+		then
+			echo "Craftbukkit is not running."
+			exit 3
+		else
+			echo "Craftbukkit is started."
+		fi
+		;;
+
 	view)
 		$USER screen -x $SCREENNAME
 		;;
