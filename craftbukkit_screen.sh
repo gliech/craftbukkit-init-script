@@ -141,7 +141,7 @@ case "$1" in
 		;;		
 
 	*)
-		echo "Usage: $0 { start | stop | restart | view | sv (start & view) }"
+		echo "Usage: $0 { start | stop | restart | try-restart | reload | force-reload | status | view | sv (start & view) }"
 		;;
 esac
 exit 0
