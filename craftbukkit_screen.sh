@@ -99,6 +99,19 @@ case "$1" in
 		$USER screen $SCREENOPTS $SCREENNAME $JAVA $JAVAOPTS -jar $MINECRAFT $MINECRAFTOPS
 		;;
 
+	try-restart)
+		if [ "$RUNNING" != "" ]
+		then
+			$USER screen -S $SCREENNAME -p 0 -X stuff `printf "stop\r"`
+			cd $LOCATION
+			until [ "$RUNNING" == "" ]
+			do
+				RUNNING=`screen -ls | grep $SCREENNAME`
+			done
+			$USER screen $SCREENOPTS $SCREENNAME $JAVA $JAVAOPTS -jar $MINECRAFT $MINECRAFTOPS
+		fi
+		;;
+
 	view)
 		$USER screen -x $SCREENNAME
 		;;
