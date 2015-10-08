@@ -8,8 +8,8 @@
 # Should-Stop:       $named
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: Manages Craftbukkit
-# Description:       Launches and Controls Craftbukkit in the background with the help of GNU screen.
+# Short-Description: Manages CraftBukkit
+# Description:       Launches and controls CraftBukkit in the background with the help of GNU screen.
 ### END INIT INFO
 
 ### BEGIN SCRIPT HEADER
@@ -17,7 +17,7 @@
 # description:       Launches and Controls Craftbukkit in the background with the help of GNU screen.
 # author:            gliech
 # date:              20151008
-# notes:             This script has been released to the public domain under http://pastebin.com/tQBm2xWv I only take credit for the changes I made myself.
+# notes:             This script has been released to the public domain under http://pastebin.com/tQBm2xWv . I only take credit for the changes I made myself.
 # bash_version:      4.2.25(1)-release
 ### END SCRIPT HEADER
 
