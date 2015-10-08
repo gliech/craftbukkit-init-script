@@ -31,6 +31,9 @@ LOCATION="/path/to/server/files"
 # Replace CraftBukkit with the name of the .jar file you use
 MINECRAFT="CraftBukkit.jar"
 
+# You may place command line arguments for the CraftBukkit server in here.
+# A complete list can be found under:
+# http://wiki.bukkit.org/CraftBukkit_Command_Line_Arguments
 MINECRAFTOPTS=""
 
 # Path to your java executable (or just "java" if it's already in your $PATH)
@@ -39,10 +42,19 @@ JAVA="java"
 # Java Options - Replace with options that are sane and stable for your server
 JAVAOPTS="-server -Xms1024M -Xmx1024M"
 
+# Screen Name - The name of the screen session that will be launched(purely cosmetic)
 SCREENNAME="craftbukkit"
 
+# Screen Options - Replace this if you know what you are doing. If you are not
+# using screen on a regular basis, the given options should suffice. However
+# you may want to change this if you want to attach the server to a running
+# screen-session.
 SCREENOPTS="-dmS"
 
+# You may place a user in here to execute the commands. This is useful if you
+# want to use this script in combination with rc#.d, since invoking the server
+# with root privileges poses a potential security-risk. Leaving this blank
+# will execute the server as the user invoking the script.
 USER=""
 
 ### END CONFIGURATION
