@@ -24,17 +24,26 @@
 
 ### START CONFIGURATION
 
-# Replace the location path with the folder containing your CraftBukkit.jar or minecraft_server.jar file
-LOCATION="/home/username/minecraft"
+# Replace the location path with the folder containing your CraftBukkit.jar
+# or minecraft_server.jar file
+LOCATION="/path/to/server/files"
 
-#Replace CraftBukkit with the name of the .jar file you use
+# Replace CraftBukkit with the name of the .jar file you use
 MINECRAFT="CraftBukkit.jar"
+
+MINECRAFTOPTS=""
 
 # Path to your java executable (or just "java" if it's already in your $PATH)
 JAVA="java"
 
-#Java Options - Replace with options that are sane and stable for your server
-JAVAOPTS="-server -jar"
+# Java Options - Replace with options that are sane and stable for your server
+JAVAOPTS="-server -Xms1024M -Xmx1024M"
+
+SCREENNAME="craftbukkit"
+
+SCREENOPTS="-dmS"
+
+USER=""
 
 ### END CONFIGURATION
 
@@ -42,7 +51,7 @@ JAVAOPTS="-server -jar"
 #check for GNU screen installation
 if !( hash screen 2>/dev/null )
 then
-	echo "It seems GNU screen is not installed on the maschine. Please install it, if you want to use this script."
+	echo "It seems GNU screen is not installed on the machine. Please install it, if you want to use this script."
 	exit 1
 fi
 
@@ -54,37 +63,37 @@ case "$1" in
 		cd $LOCATION
 		if [ "$RUNNING" == "" ]
 		then
-			screen -dmS minecraft $JAVA $JAVAOPTS $MINECRAFT nogui
+			$USER screen $SCREENOPTS $SCREENNAME $JAVA $JAVAOPTS -jar $MINECRAFT $MINECRAFTOPTS
 		fi
 		;;
 
 	stop)
-		screen -S minecraft -p 0 -X stuff `printf "stop\r"`
+		$USER screen -S $SCREENNAME -p 0 -X stuff `printf "stop\r"`
 		;;
 
 	restart)
-		screen -S minecraft -p 0 -X stuff `printf "stop\r"`
+		$USER screen -S $SCREENNAME -p 0 -X stuff `printf "stop\r"`
 		cd $LOCATION
 		until [ "$RUNNING" == "" ]
 		do
-			RUNNING=`screen -ls | grep minecraft`
+			RUNNING=`screen -ls | grep $SCREENNAME`
 		done
-		screen -dmS minecraft $JAVA $JAVAOPTS $MINECRAFT nogui
+		$USER screen $SCREENOPTS $SCREENNAME $JAVA $JAVAOPTS -jar $MINECRAFT $MINECRAFTOPS
 		;;
 
 	view)
-		screen -x minecraft
+		$USER screen -x $SCREENNAME
 		;;
 
 	sv)
 		cd $LOCATION
 		if [ "$RUNNING" == "" ]
 		then
-			screen -dmS minecraft $JAVA $JAVAOPTS $MINECRAFT nogui
+			$USER screen $SCREENOPTS $SCREENNAME $JAVA $JAVAOPTS -jar $MINECRAFT $MINECRAFTOPS
 		fi
 		sleep 1
-		screen -x minecraft
-		;;	
+		$USER screen -x $SCREENNAME
+		;;		
 
 	*)
 		echo "Usage: $0 { start | stop | restart | view | sv (start & view) }"
