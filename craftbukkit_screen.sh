@@ -59,23 +59,17 @@ case "$1" in
 		;;
 
 	stop)
-		screen -x minecraft -X stuff "`printf "kickall Restarting server!  Try again in 60 seconds!\r"`"
-		sleep 2
-		screen -x minecraft -X stuff `printf "stop\r"`
+		screen -S minecraft -p 0 -X stuff `printf "stop\r"`
 		;;
 
 	restart)
-		screen -x minecraft -X stuff "`printf "kickall Restarting server!  Try again in 60 seconds!\r"`"
-		sleep 2
-		screen -x minecraft -X stuff `printf "stop\r"`
+		screen -S minecraft -p 0 -X stuff `printf "stop\r"`
 		cd $LOCATION
 		until [ "$RUNNING" = "" ]
 		do
 			RUNNING=`screen -ls | grep minecraft`
 		done
 		screen -dmS minecraft $JAVA $JAVAOPTS $MINECRAFT nogui
-		sleep 1
-		screen -x minecraft
 		;;
 
 	view)
