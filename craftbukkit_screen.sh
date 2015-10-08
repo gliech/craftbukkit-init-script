@@ -38,6 +38,7 @@ JAVAOPTS="-server -jar"
 
 ### END CONFIGURATION
 
+
 #check for GNU screen installation
 if !( hash screen 2>/dev/null )
 then
@@ -51,7 +52,6 @@ RUNNING=`screen -ls | grep minecraft`
 case "$1" in
 	start)
 		cd $LOCATION
-		RUNNING=`screen -ls | grep minecraft`
 		if [ "$RUNNING" = "" ]
 		then
 			screen -dmS minecraft $JAVA $JAVAOPTS $MINECRAFT nogui
@@ -68,15 +68,14 @@ case "$1" in
 		screen -x minecraft -X stuff "`printf "kickall Restarting server!  Try again in 60 seconds!\r"`"
 		sleep 2
 		screen -x minecraft -X stuff `printf "stop\r"`
-		RUNNING=`screen -ls | grep minecraft`
 		cd $LOCATION
 		until [ "$RUNNING" = "" ]
 		do
 			RUNNING=`screen -ls | grep minecraft`
 		done
 		screen -dmS minecraft $JAVA $JAVAOPTS $MINECRAFT nogui
-			sleep 1
-			screen -x minecraft
+		sleep 1
+		screen -x minecraft
 		;;
 
 	view)
